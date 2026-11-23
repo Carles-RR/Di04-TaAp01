@@ -37,6 +37,30 @@ export class PruebaServidorPage {
 
   // TODO - Añadir el método enviarMensaje() que se encargará de enviar el mensaje al servidor y procesar la respuesta.
   enviarMensaje() {
-    
+    const texto = this.mensaje();
+
+    // Combrueba si el texto está vacio
+    if (!texto || texto ===''){
+      return;
+    }
+
+    // Resetea todo
+    this.error.set(null);
+    this.respuesta.set(null);
+    this.recibidoEn.set(null);
+    this.enviando.set(false);
+
+    // Nueva llamada
+    this.servidorService.probarConexion(texto).subscribe({
+      next: (res) => {
+        this.respuesta.set(res.mensaje);
+        this.recibidoEn.set(res.recibidoEn);
+        this.enviando.set(false);
+      },
+      error: (res) => {
+        this.error.set('No se ha podido conectar con el servidor.');
+        this.enviando.set(false);
+      },
+    });
   }
 }

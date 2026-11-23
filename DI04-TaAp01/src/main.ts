@@ -2,6 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 // TODO - Importar provideHttpClient() de @angular/common/http para poder hacer peticiones HTTP al backend.
+import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
@@ -19,5 +20,6 @@ bootstrapApplication(AppComponent, {
     //TODO - Añadir provideHttpClient() para poder hacer peticiones HTTP al backend.
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),provideAuth(() => getAuth()),
+    provideHttpClient(),
   ],
 });

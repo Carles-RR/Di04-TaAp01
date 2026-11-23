@@ -10,14 +10,36 @@
 <ion-content class="ion-padding">
   <!-- TODO - Añadir el ion-item-->
   <ion-item>
-    
+    <ion-label position="stacked">Mensaje a enviar</ion-label>
+    <ion-input
+      placeholder="Escribe algo, por ejemplo: Kaixo servidor"
+      [value]="mensaje()"
+      (ionInput)="mensaje.set($event.detail.value ?? '')">
+    </ion-input>
   </ion-item>
 
   <!-- TODO - Añadir el botón de envío -->
   <ion-button expand="block" class="ion-margin-top" (click)="enviarMensaje()">
+    expand="block"
+    class="ion-margin-top"
+    [disabled]="enviando()"
+    (click)="enviarMensaje()">
     Enviar al servidor
   </ion-button>
 
   <!-- TODO - Añadir el mensaje de respuesta y el error-->
- 
+  @if (respuesta()) {
+    <ion-item color="success" class="ion-margin-top">
+      <ion-label class="ion-text-wrap">
+        El servidor ha recibido tu mensaje: "{{ respuesta() }}"
+        <p>Recibido en el servidor: {{ recibidoEn() | date:'medium' }}</p>
+      </ion-label>
+    </ion-item>
+  }
+
+  @if (error()) {
+    <ion-item color="danger" class="ion-margin-top">
+      <ion-label class="ion-text-wrap">{{ error() }}</ion-label>
+    </ion-item>
+  }
 </ion-content>
