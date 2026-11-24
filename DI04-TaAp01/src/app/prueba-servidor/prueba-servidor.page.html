@@ -19,13 +19,13 @@
   </ion-item>
 
   <!-- TODO - Añadir el botón de envío -->
-  <ion-button expand="block" class="ion-margin-top" (click)="enviarMensaje()">
+  <ion-button
     expand="block"
     class="ion-margin-top"
     [disabled]="enviando()"
     (click)="enviarMensaje()">
     Enviar al servidor
-  </ion-button>
+</ion-button>
 
   <!-- TODO - Añadir el mensaje de respuesta y el error-->
   @if (respuesta()) {
